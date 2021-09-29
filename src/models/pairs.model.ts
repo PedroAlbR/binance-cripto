@@ -1,8 +1,10 @@
-export class PairsModel {
-  static async find() {
-    return [];
-  }
-  static async create() {
-    console.log();
-  }
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+
+@Entity('PAIRS')
+export class Pairs {
+  @PrimaryGeneratedColumn({ name: 'ID' })
+  id: number;
+
+  @Column('varchar', { name: 'SYMBOL' })
+  symbol: string;
 }

@@ -2,26 +2,13 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 
-import express from 'express';
+import { createConnection } from 'typeorm';
 import { PORT } from './constants';
-import { setupRoutes } from './routes';
+import app from './app';
 
-const app = express();
-
-app.use(express.json());
-
-setupRoutes(app);
-
-// Not found handler
-app.use(function (req, res) {
-  res.status(404).send('404 Not Found');
-});
-
-// Error handler
-// app.use(errorHandler);
-
-app.listen(PORT, () => {
-  console.log(`API Running at http://localhost:${PORT}`);
-});
-
-export default app;
+(async () => {
+  await createConnection();
+  app.listen(PORT, () => {
+    console.log(`API Running at http://localhost:${PORT}`);
+  });
+})();

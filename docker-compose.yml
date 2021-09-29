@@ -1,0 +1,11 @@
+---
+version: '3.8'
+services:
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: reallyStrongPwd123
+      MYSQL_DATABASE: binance
+    ports:
+      - 3306:3306
