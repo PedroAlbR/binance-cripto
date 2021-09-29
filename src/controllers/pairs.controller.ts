@@ -29,4 +29,13 @@ export class PairsController {
       next(error);
     }
   }
+
+  async savePairPrice(req: Request, res: Response, next: NextFunction) {
+    try {
+      await pairsService.savePairPrice();
+      res.status(201).json({ message: 'Price history updated' });
+    } catch (error) {
+      next(error);
+    }
+  }
 }

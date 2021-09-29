@@ -6,6 +6,10 @@ const pairsController = new PairsController();
 const router = express();
 
 // eslint-disable-next-line prettier/prettier
+router.route('/save-price')
+  .post(pairsController.savePairPrice);
+
+// eslint-disable-next-line prettier/prettier
 router.route('/')
   .get(pairsController.getAll)
   .post(pairsController.create);
