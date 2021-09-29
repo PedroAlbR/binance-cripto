@@ -14,7 +14,7 @@ app.use(function (req, res) {
 
 // Error handler
 app.use((error, req, res, next) => {
-  res.status(500).json({ error: error.message });
+  res.status(500).json(error instanceof Error ? { message: error.message } : error);
 });
 
 export default app;

@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { PairsService } from '../services/pairs.service';
+import * as SymbolService from '../services/binance.service';
 
 const pairsService = new PairsService();
 
@@ -8,16 +9,22 @@ export class PairsController {
     try {
       const data = await pairsService.getAll();
 
-      res.json(data);
+      res.json({ results: data });
     } catch (error) {
       next(error);
     }
   }
 
   async create(req: Request, res: Response, next: NextFunction) {
+    const { symbol }: { symbol: string } = req.body;
     try {
-      await pairsService.create(req.body);
-      res.status(202).send({ status: 'created' });
+      if (!symbol) throw new Error('Invalid Symbol');
+
+      // If the average exists, the symbol does too.
+      await SymbolService.getAverage(symbol);
+
+      await pairsService.create(symbol);
+      res.status(201).send({ message: `Symbol ${symbol} created` });
     } catch (error) {
       next(error);
     }

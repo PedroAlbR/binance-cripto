@@ -6,9 +6,16 @@ export class PairsService {
     return getRepository(Pairs).find();
   }
 
-  async create(pair: Pairs) {
+  async create(symbol: string) {
     const pairsRepository = getRepository(Pairs);
-    const newPair = pairsRepository.create(pair);
+
+    const existingPair = await pairsRepository.findOne({
+      where: { symbol: symbol }
+    });
+
+    if (existingPair) throw new Error('Symbol already exists');
+
+    const newPair = pairsRepository.create({ symbol });
 
     await pairsRepository.save(newPair);
   }
