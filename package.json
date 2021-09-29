@@ -9,6 +9,7 @@
     "eslint": "eslint --quiet --ext .ts .",
     "format": "prettier -w 'src/**/*.ts'",
     "prepare": "husky install",
+    "cron": "ts-node cron-job/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -17,6 +18,7 @@
     "express": "^4.17.1",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.0",
+    "node-cron": "^3.0.0",
     "node-fetch": "^2.6.2",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.37"
