@@ -1,9 +1,9 @@
-import express from 'express';
+import { Router } from 'express';
 import { PairsController } from '../controllers/pairs.controller';
 
 const pairsController = new PairsController();
 
-const router = express();
+const router = Router();
 
 // eslint-disable-next-line prettier/prettier
 router.route('/save-price')
